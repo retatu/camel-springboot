@@ -1,0 +1,3 @@
+type,sku#,itemdescription,price
+UPDATE,100,iPhone 6s,1887.30
+UPDATE,100,Samsung Galaxy s6,1887.30
