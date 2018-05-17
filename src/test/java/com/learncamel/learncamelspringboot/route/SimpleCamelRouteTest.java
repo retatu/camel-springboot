@@ -37,6 +37,12 @@ public class SimpleCamelRouteTest {
         FileUtils.deleteDirectory(new File("data/output"));
     }
 
+    @AfterClass
+    public static void startCleanUp2() throws IOException {
+        FileUtils.cleanDirectory(new File("data/input"));
+        FileUtils.deleteDirectory(new File("data/output"));
+    }
+
     @Test
     public void testModeFile() throws InterruptedException {
         String message = "type,sku#,itemdescription,price\n" +

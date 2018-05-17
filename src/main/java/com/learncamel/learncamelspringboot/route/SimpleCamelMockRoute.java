@@ -6,7 +6,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SimpleCamelRoute extends RouteBuilder {
+public class SimpleCamelMockRoute extends RouteBuilder {
 
     @Autowired
     Environment environment;
@@ -14,7 +14,12 @@ public class SimpleCamelRoute extends RouteBuilder {
     public void configure() throws Exception {
         from("{{startRoute}}")
             .log("Timer Invoked and body is "+ environment.getProperty("message"))
-                .pollEnrich("{{fromRoute}}")
-                    .to("{{toRoute1}}");
+                .choice()
+                    .when(header("env").isNotEqualTo("mock"))
+                        .pollEnrich("{{fromRoute}}")
+                        .log("Isn't a mock")
+                    .otherwise()
+                        .log("Is a mock").end()
+                .to("{{toRoute1}}");
     }
 }
