@@ -33,25 +33,25 @@ public class SimpleCamelRouteTest {
 
     @BeforeClass
     public static void startCleanUp() throws IOException {
-        FileUtils.cleanDirectory(new File("data/input"));
+    //    FileUtils.cleanDirectory(new File("data/input"));
         FileUtils.deleteDirectory(new File("data/output"));
     }
 
     @AfterClass
     public static void startCleanUp2() throws IOException {
-        FileUtils.cleanDirectory(new File("data/input"));
+    //    FileUtils.cleanDirectory(new File("data/input"));
         FileUtils.deleteDirectory(new File("data/output"));
     }
 
     @Test
     public void testModeFile() throws InterruptedException {
         String message = "type,sku#,itemdescription,price\n" +
-                "ADD,100,iPhone 6s,1887.30\n" +
-                "ADD,100,Samsung Galaxy s6,1887.30";
+                "ADD,100,iPhone 6s,1887\n" +
+                "ADD,100,Samsung Galaxy s6,1887";
 
         producerTemplate.sendBodyAndHeader(environment.getProperty("fromRoute"), message, Exchange.FILE_NAME, "test.txt");
 
-        Thread.sleep(3000);
+        Thread.sleep(15000);
 
         File file = new File("data/output/test.txt");
 
