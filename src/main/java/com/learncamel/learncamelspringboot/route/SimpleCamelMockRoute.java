@@ -32,7 +32,10 @@ public class SimpleCamelMockRoute extends RouteBuilder {
                         .log("Is a mock").end()
                 .to("{{toRoute1}}")
                 .unmarshal(dataFormat)
-                    .log("Body is: ${body}");
+                    .log("Body is: ${body}")
+                .split(body())
+                    .log("Body is: ${body}")
+                .end();
 
         log.info("Ending the route....");
     }

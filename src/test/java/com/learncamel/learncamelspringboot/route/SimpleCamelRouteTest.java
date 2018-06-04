@@ -51,7 +51,7 @@ public class SimpleCamelRouteTest {
 
         producerTemplate.sendBodyAndHeader(environment.getProperty("fromRoute"), message, Exchange.FILE_NAME, "test.txt");
 
-        Thread.sleep(15000);
+        Thread.sleep(5000);
 
         File file = new File("data/output/test.txt");
 
