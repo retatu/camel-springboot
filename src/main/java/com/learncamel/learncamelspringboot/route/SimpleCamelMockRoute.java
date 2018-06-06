@@ -6,15 +6,24 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;
 import org.apache.camel.spi.DataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+
+import javax.sql.DataSource;
 
 @Component
 @Slf4j
 public class SimpleCamelMockRoute extends RouteBuilder {
 
+    @Qualifier("dataSource")
+    @Autowired
+    DataSource dataSource;
+
     @Autowired
     Environment environment;
+
+
     @Override
     public void configure() throws Exception {
 
