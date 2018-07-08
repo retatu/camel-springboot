@@ -14,6 +14,7 @@ spring:
 startRoute: timer:myTimer?period=10s
 fromRoute: file:data/input?delete=true&readLock=none
 toRoute1: file:data/output
+toRoute2: jdbc:dataSource
 
 message: DEV Environment
 ---
@@ -42,6 +43,7 @@ spring:
 startRoute: timer:myTimer?period=10s
 fromRoute: file:data/input?delete=true&readLock=none
 toRoute1: file:data/output
+toRoute2: jdbc:dataSource
 
 message: STAGE Environment
 ---
@@ -56,6 +58,7 @@ spring:
 startRoute: timer:myTimer?period=10s
 fromRoute: file:data/input?delete=true&readLock=none
 toRoute1: file:data/output
+toRoute2: jdbc:dataSource
 
 message: PROD Environment
 ---
