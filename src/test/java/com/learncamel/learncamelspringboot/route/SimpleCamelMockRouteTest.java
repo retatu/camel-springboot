@@ -37,8 +37,8 @@ public class SimpleCamelMockRouteTest extends CamelTestSupport {
     @Test
     public void testMoveFile(){
         String message = "type,sku#,itemdescription,price\n" +
-                "ADD,100,iPhone 6s,1887.30\n" +
-                "ADD,100,Samsung Galaxy s6,1887.30";
+                "ADD,100,iPhone 6s,387\n" +
+                "ADD,100,Samsung Galaxy s6,320";
 
         MockEndpoint mockEndpoint = getMockEndpoint(environment.getProperty("toRoute1"));
         mockEndpoint.expectedBodiesReceived(message);

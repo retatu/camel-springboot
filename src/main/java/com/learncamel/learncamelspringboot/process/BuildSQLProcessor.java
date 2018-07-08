@@ -18,12 +18,11 @@ public class BuildSQLProcessor implements org.apache.camel.Processor {
         if(item.getTransactionType().equals("ADD")){
             query.append("INSERT INTO ITEMS (SKU, ITEM_DESCRIPTION, PRICE) VALUES ('");
             query.append(item.getSku()+"','");
-            query.append(item.getItemDescription()+"','");
-            query.append(item.getPrice()+"')");
+            query.append(item.getItemDescription()+"',");
+            query.append(item.getPrice()+")");
         }
 
         log.info("Final query is: "+query);
-
         exchange.getIn().setBody(query.toString());
     }
 }

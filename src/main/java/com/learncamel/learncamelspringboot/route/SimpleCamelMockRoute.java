@@ -48,9 +48,8 @@ public class SimpleCamelMockRoute extends RouteBuilder {
                     .log("Body is: ${body}")
                 .split(body())
                     .log("Body is: ${body}")
-                    .to("{{toRoute2}}")
-                    .log("Body is: ${body}")
                     .process(buildSQLProcessor)
+                    .to("{{toRoute2}}")
                 .end();
 
         log.info("Ending the route....");
