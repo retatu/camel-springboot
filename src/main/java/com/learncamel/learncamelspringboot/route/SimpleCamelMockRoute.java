@@ -2,6 +2,7 @@ package com.learncamel.learncamelspringboot.route;
 
 import com.learncamel.learncamelspringboot.domain.Item;
 import com.learncamel.learncamelspringboot.process.BuildSQLProcessor;
+import com.learncamel.learncamelspringboot.process.SuccessProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;
@@ -27,6 +28,9 @@ public class SimpleCamelMockRoute extends RouteBuilder {
     @Autowired
     BuildSQLProcessor buildSQLProcessor;
 
+    @Autowired
+    SuccessProcessor successProcessor;
+
 
     @Override
     public void configure() throws Exception {
@@ -50,7 +54,9 @@ public class SimpleCamelMockRoute extends RouteBuilder {
                     .log("Body is: ${body}")
                     .process(buildSQLProcessor)
                     .to("{{toRoute2}}")
-                .end();
+                .end()
+            .process(successProcessor)
+        .to("{{toRoute3}}");
 
         log.info("Ending the route....");
     }

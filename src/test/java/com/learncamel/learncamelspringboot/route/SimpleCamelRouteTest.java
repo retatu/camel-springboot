@@ -4,6 +4,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.test.spring.CamelSpringBootRunner;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,7 +17,10 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @ActiveProfiles("dev")
@@ -59,7 +63,7 @@ public class SimpleCamelRouteTest {
     }
 
     @Test
-    public void test_ADD() throws InterruptedException {
+    public void test_ADD() throws InterruptedException, IOException {
         String message = "type,sku#,itemdescription,price\n" +
                 "ADD,100,iPhone 6s,387\n" +
                 "ADD,100,Samsung Galaxy s6,320";
@@ -72,5 +76,11 @@ public class SimpleCamelRouteTest {
         File file = new File("data/output/test.txt");
 
         assertTrue(file.exists());
+
+        String expectedOutput = "Data updated SuccessFully";
+        String output = new String(Files.readAllBytes(Paths.get("data/output/success.txt")));
+
+        assertEquals(expectedOutput, output);
     }
+
 }
