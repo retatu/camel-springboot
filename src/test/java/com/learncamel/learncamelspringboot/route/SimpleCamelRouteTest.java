@@ -103,4 +103,24 @@ public class SimpleCamelRouteTest {
         assertEquals(expectedOutput, output);
     }
 
+    @Test
+    public void test_DEL() throws InterruptedException, IOException {
+        String message = "type,sku#,itemdescription,price\n" +
+                "DEL,101,iPhone 6s,287";
+
+        producerTemplate.sendBodyAndHeader(environment.getProperty("fromRoute"),
+                message, Exchange.FILE_NAME, "test.txt");
+
+        Thread.sleep(5000);
+
+        File file = new File("data/output/test.txt");
+
+        assertTrue(file.exists());
+
+        String expectedOutput = "Data updated SuccessFully";
+        String output = new String(Files.readAllBytes(Paths.get("data/output/success.txt")));
+
+        assertEquals(expectedOutput, output);
+    }
+
 }

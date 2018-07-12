@@ -25,6 +25,9 @@ public class BuildSQLProcessor implements org.apache.camel.Processor {
             query.append(item.getPrice());
             query.append(" WHERE SKU = ");
             query.append(item.getSku());
+        }else if(item.getTransactionType().equals("DEL")){
+            query.append("DELETE FROM ITEMS WHERE sku = ");
+            query.append(item.getSku());
         }
 
         log.info("Final query is: "+query);
