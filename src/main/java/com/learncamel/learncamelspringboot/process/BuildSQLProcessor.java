@@ -20,6 +20,11 @@ public class BuildSQLProcessor implements org.apache.camel.Processor {
             query.append(item.getSku()+"','");
             query.append(item.getItemDescription()+"',");
             query.append(item.getPrice()+")");
+        }else if(item.getTransactionType().equals("UPDATE")){
+            query.append("UPDATE ITEMS SET PRICE = ");
+            query.append(item.getPrice());
+            query.append(" WHERE SKU = ");
+            query.append(item.getSku());
         }
 
         log.info("Final query is: "+query);

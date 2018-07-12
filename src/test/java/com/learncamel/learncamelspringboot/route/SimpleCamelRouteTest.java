@@ -50,8 +50,8 @@ public class SimpleCamelRouteTest {
     @Test
     public void testModeFile() throws InterruptedException {
         String message = "type,sku#,itemdescription,price\n" +
-                "ADD,100,iPhone 6s,387\n" +
-                "ADD,100,Samsung Galaxy s6,320";
+                "ADD,101,iPhone 6s,387\n" +
+                "ADD,102,Samsung Galaxy s6,320";
 
         producerTemplate.sendBodyAndHeader(environment.getProperty("fromRoute"), message, Exchange.FILE_NAME, "test.txt");
 
@@ -65,8 +65,28 @@ public class SimpleCamelRouteTest {
     @Test
     public void test_ADD() throws InterruptedException, IOException {
         String message = "type,sku#,itemdescription,price\n" +
-                "ADD,100,iPhone 6s,387\n" +
-                "ADD,100,Samsung Galaxy s6,320";
+                "ADD,101,iPhone 6s,387\n" +
+                "ADD,102,Samsung Galaxy s6,320";
+
+        producerTemplate.sendBodyAndHeader(environment.getProperty("fromRoute"),
+                message, Exchange.FILE_NAME, "test.txt");
+
+        Thread.sleep(5000);
+
+        File file = new File("data/output/test.txt");
+
+        assertTrue(file.exists());
+
+        String expectedOutput = "Data updated SuccessFully";
+        String output = new String(Files.readAllBytes(Paths.get("data/output/success.txt")));
+
+        assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    public void test_UPDATE() throws InterruptedException, IOException {
+        String message = "type,sku#,itemdescription,price\n" +
+                "UPDATE,101,iPhone 6s,287";
 
         producerTemplate.sendBodyAndHeader(environment.getProperty("fromRoute"),
                 message, Exchange.FILE_NAME, "test.txt");
