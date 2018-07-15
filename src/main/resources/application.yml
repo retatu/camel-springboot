@@ -30,8 +30,8 @@ spring:
 startRoute: direct:input
 fromRoute: file:data/input?delete=true&readLock=none
 toRoute1: mock:output
-toRoute2: jdbc:dataSource
-toRoute3: file:data/output?fileName=success.txt
+toRoute2: mock:output1
+toRoute3: mock:output2
 
 message: MOCK Environment
 ---

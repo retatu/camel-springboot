@@ -55,4 +55,29 @@ public class SimpleCamelMockRouteTest extends CamelTestSupport {
     }
 
 
+    @Test
+    public void testMoveFileMockDB(){
+        String message = "type,sku#,itemdescription,price\n" +
+                "ADD,101,iPhone 6s,387\n" +
+                "ADD,102,Samsung Galaxy s6,320";
+
+        String outMessage = "Data updated SuccessFully";
+
+        MockEndpoint mockEndpoint = getMockEndpoint(environment.getProperty("toRoute1"));
+        mockEndpoint.expectedBodiesReceived(message);
+        mockEndpoint.expectedMessageCount(1);
+
+        MockEndpoint mockEndpoint1 = getMockEndpoint(environment.getProperty("toRoute3"));
+        mockEndpoint1.expectedBodiesReceived(outMessage);
+        mockEndpoint1.expectedMessageCount(1);
+
+        producerTemplate.sendBodyAndHeader(environment.getProperty("startRoute"), message,
+                "env", environment.getProperty("spring.profiles.active"));
+
+        try {
+            assertMockEndpointsSatisfied();
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
