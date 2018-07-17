@@ -57,10 +57,10 @@ public class SimpleCamelMockRouteTest extends CamelTestSupport {
 
     @Test
     public void testMoveFileMockDB(){
-        String message = "type,sku#,itemdescription,price\n" +
+        String message =
+        "type,sku#,itemdescription,price\n" +
                 "ADD,101,iPhone 6s,387\n" +
                 "ADD,102,Samsung Galaxy s6,320";
-
         String outMessage = "Data updated SuccessFully";
 
         MockEndpoint mockEndpoint = getMockEndpoint(environment.getProperty("toRoute1"));

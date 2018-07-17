@@ -21,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @ActiveProfiles("dev")
@@ -121,6 +122,27 @@ public class SimpleCamelRouteTest {
         String output = new String(Files.readAllBytes(Paths.get("data/output/success.txt")));
 
         assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    public void test_ADD_Exception() throws InterruptedException, IOException {
+        String message = "type,sku#,itemdescription,price\n" +
+                "ADD,,iPhone 6s,387\n" +
+                "ADD,102,Samsung Galaxy s6,320";
+
+        producerTemplate.sendBodyAndHeader(environment.getProperty("fromRoute"),
+                message, Exchange.FILE_NAME, "test.txt");
+
+        Thread.sleep(5000);
+
+        File file = new File("data/output/test.txt");
+
+        assertTrue(file.exists());
+
+        File fileSucess = new File("data/output/success.tx");
+
+
+        assertFalse(fileSucess.exists());
     }
 
 }

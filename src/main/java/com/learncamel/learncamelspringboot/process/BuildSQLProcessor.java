@@ -1,9 +1,11 @@
 package com.learncamel.learncamelspringboot.process;
 
 import com.learncamel.learncamelspringboot.domain.Item;
+import com.learncamel.learncamelspringboot.exception.DataException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.Exchange;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
 @Component
 @Slf4j
@@ -13,7 +15,13 @@ public class BuildSQLProcessor implements org.apache.camel.Processor {
         Item item = (Item) exchange.getIn().getBody();
         log.info("Item in process is: "+item);
 
+        if(ObjectUtils.isEmpty(item.getSku())){
+            throw new DataException("Sku null for: "+item.getItemDescription());
+        }
+
         StringBuilder query = new StringBuilder();
+
+
 
         if(item.getTransactionType().equals("ADD")){
             query.append("INSERT INTO ITEMS (SKU, ITEM_DESCRIPTION, PRICE) VALUES ('");
