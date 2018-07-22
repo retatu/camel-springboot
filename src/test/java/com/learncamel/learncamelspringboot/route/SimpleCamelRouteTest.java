@@ -38,18 +38,18 @@ public class SimpleCamelRouteTest {
 
     @BeforeClass
     public static void startCleanUp() throws IOException {
-    //    FileUtils.cleanDirectory(new File("data/input"));
+        FileUtils.cleanDirectory(new File("data/input"));
         FileUtils.deleteDirectory(new File("data/output"));
     }
 
     @AfterClass
     public static void startCleanUp2() throws IOException {
-    //    FileUtils.cleanDirectory(new File("data/input"));
+        //FileUtils.cleanDirectory(new File("data/input"));
         FileUtils.deleteDirectory(new File("data/output"));
     }
 
     @Test
-    public void testModeFile() throws InterruptedException {
+    public void testMoveFile() throws InterruptedException {
         String message = "type,sku#,itemdescription,price\n" +
                 "ADD,101,iPhone 6s,387\n" +
                 "ADD,102,Samsung Galaxy s6,320";
@@ -139,8 +139,8 @@ public class SimpleCamelRouteTest {
 
         assertTrue(file.exists());
 
-        File fileSuccess = new File("data/output/success.tx");
-        assertFalse(fileSuccess.exists());
+        File errorDirectory = new File("data/input/error");
+        assertTrue(errorDirectory.exists());
     }
 
 }
