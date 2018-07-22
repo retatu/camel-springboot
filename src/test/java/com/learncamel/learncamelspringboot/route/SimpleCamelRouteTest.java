@@ -139,10 +139,8 @@ public class SimpleCamelRouteTest {
 
         assertTrue(file.exists());
 
-        File fileSucess = new File("data/output/success.tx");
-
-
-        assertFalse(fileSucess.exists());
+        File fileSuccess = new File("data/output/success.tx");
+        assertFalse(fileSuccess.exists());
     }
 
 }

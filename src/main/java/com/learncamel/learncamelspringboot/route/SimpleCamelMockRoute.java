@@ -4,6 +4,7 @@ import com.learncamel.learncamelspringboot.domain.Item;
 import com.learncamel.learncamelspringboot.process.BuildSQLProcessor;
 import com.learncamel.learncamelspringboot.process.SuccessProcessor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;
 import org.apache.camel.spi.DataFormat;
@@ -34,6 +35,10 @@ public class SimpleCamelMockRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+
+        errorHandler(deadLetterChannel("log:errorLog?level=ERROR&showProperties=true")
+            .maximumRedeliveries(3).redeliveryDelay(3000).backOffMultiplier(3).retryAttemptedLogLevel(LoggingLevel.ERROR));
+
 
         DataFormat dataFormat = new BindyCsvDataFormat(Item.class);
 
