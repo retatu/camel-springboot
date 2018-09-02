@@ -3,67 +3,109 @@ spring:
     active: prod
 camel.springboot.shutdownTimeout: 2
 ---
-spring:
-  profiles: dev
-  datasource:
+  spring:
+    profiles: dev
+    datasource:
       driver-class-name: org.postgresql.Driver
       url: jdbc:postgresql://localhost:5432/localDB
       username: postgres
       password: root
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: mrehbein45@gmail.com
+      password: 
+      properties.mail.smtp.auth: true
+      properties.mail.smtp.starttls.enable: true
 
-startRoute: timer:myTimer?period=10s
-fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
-toRoute1: file:data/output
-toRoute2: jdbc:dataSource
-toRoute3: file:data/output?fileName=success.txt
+  mailto: mrehbein45@gmail.com
+  mailfrom: mrehbein45@gmail.com
 
-message: DEV Environment
+
+  startRoute: timer:myTimer?period=10s
+  fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+  toRoute1: file:data/output
+  toRoute2: jdbc:dataSource
+  toRoute3: file:data/output?fileName=success.txt
+
+  message: DEV Environment
 ---
-spring:
-  profiles: mock
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/localDB
-    username: postgres
-    password: root
-
-startRoute: direct:input
-fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
-toRoute1: mock:output
-toRoute2: mock:output1
-toRoute3: mock:output2
-
-message: MOCK Environment
----
-spring:
-  profiles: stage
-  datasource:
+  spring:
+    profiles: mock
+    datasource:
       driver-class-name: org.postgresql.Driver
       url: jdbc:postgresql://localhost:5432/localDB
       username: postgres
       password: root
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: mrehbein45@gmail.com
+      password:
+      properties.mail.smtp.auth: true
+      properties.mail.smtp.starttls.enable: true
 
-startRoute: timer:myTimer?period=10s
-fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
-toRoute1: file:data/output
-toRoute2: jdbc:dataSource
-toRoute3: file:data/output?fileName=success.txt
+  mailto: mrehbein45@gmail.com
+  mailfrom: mrehbein45@gmail.com
 
-message: STAGE Environment
+  startRoute: direct:input
+  fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+  toRoute1: mock:output
+  toRoute2: mock:output1
+  toRoute3: mock:output2
+
+  message: MOCK Environment
+---
+  spring:
+    profiles: stage
+    datasource:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/localDB
+      username: postgres
+      password: root
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: mrehbein45@gmail.com
+      password:
+      properties.mail.smtp.auth: true
+      properties.mail.smtp.starttls.enable: true
+
+  mailto: mrehbein45@gmail.com
+  mailfrom: mrehbein45@gmail.com
+
+
+  startRoute: timer:myTimer?period=10s
+  fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+  toRoute1: file:data/output
+  toRoute2: jdbc:dataSource
+  toRoute3: file:data/output?fileName=success.txt
+
+  message: STAGE Environment
 ---
 spring:
   profiles: prod
   datasource:
-      driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://localhost:5432/localDB
-      username: postgres
-      password: root
+    driver-class-name: org.postgresql.Driver
+    url:  jdbc:postgresql://localhost:5432/localDB
+    username: postgres
+    password: root
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: mrehbein45@gmail.com
+    password:
+    properties.mail.smtp.auth:  true
+    properties.mail.smtp.starttls.enable: true
 
-startRoute: timer:myTimer?period=10s
-fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
-toRoute1: file:data/output
-toRoute2: jdbc:dataSource
-toRoute3: file:data/output?fileName=success.txt
+  mailto: mrehbein45@gmail.com
+  mailfrom: mrehbein45@gmail.com
 
-message: PROD Environment
+  startRoute: timer:myTimer?period=10s
+  fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+  toRoute1: file:data/output
+  toRoute2: jdbc:dataSource
+  toRoute3: file:data/output?fileName=success.txt
+
+  message: PROD Environment
 ---
