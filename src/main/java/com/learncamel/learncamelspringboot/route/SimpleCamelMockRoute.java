@@ -22,12 +22,12 @@ import javax.sql.DataSource;
 @Slf4j
 public class SimpleCamelMockRoute extends RouteBuilder {
 
+    @Autowired
+    Environment environment;
+
     @Qualifier("dataSource")
     @Autowired
     DataSource dataSource;
-
-    @Autowired
-    Environment environment;
 
     @Autowired
     BuildSQLProcessor buildSQLProcessor;
@@ -56,12 +56,13 @@ public class SimpleCamelMockRoute extends RouteBuilder {
 
         log.info("Starting the route....");
 
-        from("{{startRoute}}")
+        from("{{startRoute}}").routeId("mainRoute")
             .log("Timer Invoked and body is "+ environment.getProperty("message"))
                 .choice()
                     .when(header("env").isNotEqualTo("mock"))
                         .log("Isn't a mock")
                         .pollEnrich("{{fromRoute}}")
+                        .log("Isn't a mock")
                     .otherwise()
                         .log("Is a mock").end()
                 .to("{{toRoute1}}")

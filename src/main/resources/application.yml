@@ -1,87 +1,93 @@
 spring:
   profiles:
     active: prod
-camel.springboot.shutdownTimeout: 2
+camel:
+  springboot:
+    shutdownTimeout: 2
+    health.indicator.enabled: true
+
+management:
+  security:
+    enabled: false
+
 ---
-  spring:
-    profiles: dev
-    datasource:
-      driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://localhost:5432/localDB
-      username: postgres
-      password: root
-    mail:
-      host: smtp.gmail.com
-      port: 587
-      username: mrehbein45@gmail.com
-      password: 
-      properties.mail.smtp.auth: true
-      properties.mail.smtp.starttls.enable: true
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/localDB
+    username: postgres
+    password: root
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: mrehbein45@gmail.com
+    password:
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
 
-  mailto: mrehbein45@gmail.com
-  mailfrom: mrehbein45@gmail.com
+mailto: mrehbein45@gmail.com
+mailfrom: mrehbein45@gmail.com
 
+startRoute: timer:myTimer?period=10s
+fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+toRoute1: file:data/output
+toRoute2: jdbc:dataSource
+toRoute3: file:data/output?fileName=success.txt
 
-  startRoute: timer:myTimer?period=10s
-  fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
-  toRoute1: file:data/output
-  toRoute2: jdbc:dataSource
-  toRoute3: file:data/output?fileName=success.txt
-
-  message: DEV Environment
+message: DEV Environment
 ---
-  spring:
-    profiles: mock
-    datasource:
-      driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://localhost:5432/localDB
-      username: postgres
-      password: root
-    mail:
-      host: smtp.gmail.com
-      port: 587
-      username: mrehbein45@gmail.com
-      password:
-      properties.mail.smtp.auth: true
-      properties.mail.smtp.starttls.enable: true
+spring:
+  profiles: mock
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/localDB
+    username: postgres
+    password: root
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: mrehbein45@gmail.com
+    password:
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
 
-  mailto: mrehbein45@gmail.com
-  mailfrom: mrehbein45@gmail.com
+mailto: mrehbein45@gmail.com
+mailfrom: mrehbein45@gmail.com
 
-  startRoute: direct:input
-  fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
-  toRoute1: mock:output
-  toRoute2: mock:output1
-  toRoute3: mock:output2
+startRoute: direct:input
+fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+toRoute1: mock:output
+toRoute2: mock:output1
+toRoute3: mock:output2
 
-  message: MOCK Environment
+message: MOCK Environment
 ---
-  spring:
-    profiles: stage
-    datasource:
-      driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://localhost:5432/localDB
-      username: postgres
-      password: root
-    mail:
-      host: smtp.gmail.com
-      port: 587
-      username: mrehbein45@gmail.com
-      password:
-      properties.mail.smtp.auth: true
-      properties.mail.smtp.starttls.enable: true
+spring:
+  profiles: stage
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/localDB
+    username: postgres
+    password: root
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: mrehbein45@gmail.com
+    password:
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
 
-  mailto: mrehbein45@gmail.com
-  mailfrom: mrehbein45@gmail.com
+mailto: mrehbein45@gmail.com
+mailfrom: mrehbein45@gmail.com
 
+startRoute: timer:myTimer?period=10s
+fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+toRoute1: file:data/output
+toRoute2: jdbc:dataSource
+toRoute3: file:data/output?fileName=success.txt
 
-  startRoute: timer:myTimer?period=10s
-  fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
-  toRoute1: file:data/output
-  toRoute2: jdbc:dataSource
-  toRoute3: file:data/output?fileName=success.txt
-
-  message: STAGE Environment
+message: STAGE Environment
 ---
 spring:
   profiles: prod
@@ -98,14 +104,14 @@ spring:
     properties.mail.smtp.auth:  true
     properties.mail.smtp.starttls.enable: true
 
-  mailto: mrehbein45@gmail.com
-  mailfrom: mrehbein45@gmail.com
+mailto: mrehbein45@gmail.com
+mailfrom: mrehbein45@gmail.com
 
-  startRoute: timer:myTimer?period=10s
-  fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
-  toRoute1: file:data/output
-  toRoute2: jdbc:dataSource
-  toRoute3: file:data/output?fileName=success.txt
+startRoute: timer:myTimer?period=10s
+fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+toRoute1: file:data/output
+toRoute2: jdbc:dataSource
+toRoute3: file:data/output?fileName=success.txt
 
-  message: PROD Environment
+message: PROD Environment
 ---

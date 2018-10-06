@@ -139,8 +139,6 @@ public class SimpleCamelRouteTest {
 
         assertTrue(file.exists());
 
-        File errorDirectory = new File("data/input/error");
-        assertTrue(errorDirectory.exists());
     }
 
 }
