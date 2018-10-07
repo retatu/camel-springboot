@@ -45,7 +45,7 @@ public class SimpleCamelMockRoute extends RouteBuilder {
         //errorHandler(deadLetterChannel("log:errorLog?level=ERROR&showProperties=true")
         //    .maximumRedeliveries(3).redeliveryDelay(3000).backOffMultiplier(2).retryAttemptedLogLevel(LoggingLevel.ERROR));
 
-        onException(DataException.class).log(LoggingLevel.ERROR, "DataException in the route ${body}").process(mailProcessor);
+        onException(DataException.class).log(LoggingLevel.ERROR, "DataException in the route ${body}");
 
         onException(PSQLException.class).log(LoggingLevel.ERROR, "PSQLException in the route ${body}")
                 .maximumRedeliveries(3).redeliveryDelay(3000).backOffMultiplier(2).retryAttemptedLogLevel(LoggingLevel.ERROR)

@@ -34,6 +34,7 @@ fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
 toRoute1: file:data/output
 toRoute2: jdbc:dataSource
 toRoute3: file:data/output?fileName=success.txt
+healthRoute: timer:healthTimer?period=10s
 
 message: DEV Environment
 ---
@@ -60,6 +61,7 @@ fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
 toRoute1: mock:output
 toRoute2: mock:output1
 toRoute3: mock:output2
+healthRoute: direct:heatlh
 
 message: MOCK Environment
 ---
@@ -86,6 +88,7 @@ fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
 toRoute1: file:data/output
 toRoute2: jdbc:dataSource
 toRoute3: file:data/output?fileName=success.txt
+healthRoute: timer:healthTimer?period=10s
 
 message: STAGE Environment
 ---
@@ -112,6 +115,7 @@ fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
 toRoute1: file:data/output
 toRoute2: jdbc:dataSource
 toRoute3: file:data/output?fileName=success.txt
+healthRoute: timer:healthTimer?period=10s
 
 message: PROD Environment
 ---

@@ -1,2 +1,0 @@
-type,sku#,itemdescription,price
-DEL,102,iPhone 6s,100
