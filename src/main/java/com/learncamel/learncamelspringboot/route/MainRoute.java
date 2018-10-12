@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 
 @Component
 @Slf4j
-public class SimpleCamelMockRoute extends RouteBuilder {
+public class MainRoute extends RouteBuilder {
 
     @Autowired
     Environment environment;

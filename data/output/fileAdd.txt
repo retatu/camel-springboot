@@ -1,0 +1,3 @@
+type,sku#,itemdescription,price
+ADD,101,iPhone 6s,101
+ADD,102,Samsung Galaxy s6,320

@@ -61,7 +61,7 @@ fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
 toRoute1: mock:output
 toRoute2: mock:output1
 toRoute3: mock:output2
-healthRoute: direct:heatlh
+healthRoute: direct:health
 
 message: MOCK Environment
 ---
@@ -96,15 +96,15 @@ spring:
   profiles: prod
   datasource:
     driver-class-name: org.postgresql.Driver
-    url:  jdbc:postgresql://localhost:5432/localDB
+    url: jdbc:postgresql://localhost:5432/localDB
     username: postgres
     password: root
   mail:
     host: smtp.gmail.com
     port: 587
     username: mrehbein45@gmail.com
-    password:
-    properties.mail.smtp.auth:  true
+    password: 
+    properties.mail.smtp.auth: true
     properties.mail.smtp.starttls.enable: true
 
 mailto: mrehbein45@gmail.com
